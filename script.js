@@ -5,12 +5,13 @@ import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc }
 
 // Your Firebase config (replace with your own!)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDioJ-fyROEsF4l41M43zdNMsMcclbh1SI",
+  authDomain: "job-tracker-8e73a.firebaseapp.com",
+  projectId: "job-tracker-8e73a",
+  storageBucket: "job-tracker-8e73a.firebasestorage.app",
+  messagingSenderId: "642214335961",
+  appId: "1:642214335961:web:63be515deff5177e3935c8"
+  measurementId: "G-GGXJVPKZBE"
 };
 
 // Init Firebase + Firestore
