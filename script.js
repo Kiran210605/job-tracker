@@ -11,7 +11,7 @@ const firebaseConfig = {
   storageBucket: "job-tracker-8e73a.firebasestorage.app",
   messagingSenderId: "642214335961",
   appId: "1:642214335961:web:63be515deff5177e3935c8"
-  measurementId: "G-GGXJVPKZBE"
+  // measurementId: "G-GGXJVPKZBE"
 };
 
 // Init Firebase + Firestore
