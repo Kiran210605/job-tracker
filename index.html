@@ -8,35 +8,27 @@
 </head>
 <body>
   <div class="container">
-  <h2>Job Application Tracker 📝</h2>
-  <div class="input-area">
-    <input type="text" id="companyInput" placeholder="Enter company name..." />
-    <input type="date" id="dateInput" />
-  </div>
-  <div class="input-area">
-    <textarea id="notesInput" placeholder="Write what you did..." rows="4"></textarea>
-  </div>
-  <button class="add-btn" onclick="addCompany()">Add</button>
-  <ul id="companyList"></ul>
-  </div>
-
-  <!-- <div class="container">
     <h2>Job Application Tracker 📝</h2>
+    
+    <!-- Company + Date -->
     <div class="input-area">
       <input type="text" id="companyInput" placeholder="Enter company name..." />
       <input type="date" id="dateInput" />
-      <textarea id="notesInput" placeholder="Write what you did..." rows="3"></textarea>
+    </div>
 
-      <!-- <textarea id="notesInput" placeholder="Write what you did..." rows="1"></textarea> -->
-      <!-- <button onclick="addCompany()">Add</button> -->
-    <!-- </div> --> 
+    <!-- Notes -->
+    <div class="input-area">
+      <textarea id="notesInput" placeholder="Write what you did..." rows="4"></textarea>
+    </div>
+
+    <!-- Add Button -->
+    <button class="add-btn" onclick="addCompany()">Add</button>
+
+    <!-- Applications List -->
     <ul id="companyList"></ul>
   </div>
-<!--   <script src="script.js"></script> -->
-  <script type="module" src="script.js"></script>
 
+  <!-- Import script as a module -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
-
-
-
