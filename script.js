@@ -1,9 +1,9 @@
-// Import Firebase (v9 modular style)
+// Import Firebase SDK
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
   from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-// Your Firebase config (replace with your own!)
+// 🔹 Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyDioJ-fyROEsF4l41M43zdNMsMcclbh1SI",
   authDomain: "job-tracker-8e73a.firebaseapp.com",
@@ -11,10 +11,9 @@ const firebaseConfig = {
   storageBucket: "job-tracker-8e73a.firebasestorage.app",
   messagingSenderId: "642214335961",
   appId: "1:642214335961:web:63be515deff5177e3935c8"
-  // measurementId: "G-GGXJVPKZBE"
 };
 
-// Init Firebase + Firestore
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -28,7 +27,7 @@ async function loadCompanies() {
 }
 
 // Add new company
-async function addCompany() {
+window.addCompany = async function() {
   const companyName = document.getElementById("companyInput").value.trim();
   const date = document.getElementById("dateInput").value;
   const notes = document.getElementById("notesInput").value.trim();
@@ -46,7 +45,7 @@ async function addCompany() {
   document.getElementById("companyInput").value = "";
   document.getElementById("dateInput").value = "";
   document.getElementById("notesInput").value = "";
-}
+};
 
 // Render company in UI
 function renderCompany(app) {
@@ -72,5 +71,5 @@ function renderCompany(app) {
   document.getElementById("companyList").appendChild(li);
 }
 
-// Load everything when page opens
+// Load apps on page start
 document.addEventListener("DOMContentLoaded", loadCompanies);
