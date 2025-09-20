@@ -1,89 +1,68 @@
-function addCompany() {
-  const companyInput = document.getElementById("companyInput");
-  const dateInput = document.getElementById("dateInput");
-  const notesInput = document.getElementById("notesInput");
+// Import Firebase (v9 modular style)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
+  from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-  const companyName = companyInput.value.trim();
-  const date = dateInput.value;
-  const notes = notesInput.value.trim();
-
-  if (companyName === "" || date === "") {
-    alert("Please enter both company name and date!");
-    return;
-  }
-
-  const li = document.createElement("li");
-
-  const infoDiv = document.createElement("div");
-  infoDiv.classList.add("company-info");
-  infoDiv.innerHTML = `<strong>${companyName}</strong>
-                       <span class="date">Applied on: ${date}</span>
-                       <span class="notes">${notes}</span>`;
-
-  const delBtn = document.createElement("button");
-  delBtn.innerText = "Delete";
-  delBtn.classList.add("delete-btn");
-  delBtn.onclick = () => li.remove();
-
-  li.appendChild(infoDiv);
-  li.appendChild(delBtn);
-
-  document.getElementById("companyList").appendChild(li);
-
-  // Clear input fields
-  companyInput.value = "";
-  dateInput.value = "";
-  notesInput.value = "";
-}
-// Load saved applications from localStorage when the page loads
-window.onload = function () {
-  const savedCompanies = JSON.parse(localStorage.getItem("applications")) || [];
-  savedCompanies.forEach(app => renderCompany(app.company, app.date, app.notes));
+// Your Firebase config (replace with your own!)
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
-function addCompany() {
-  const companyInput = document.getElementById("companyInput");
-  const dateInput = document.getElementById("dateInput");
-  const notesInput = document.getElementById("notesInput");
+// Init Firebase + Firestore
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-  const companyName = companyInput.value.trim();
-  const date = dateInput.value;
-  const notes = notesInput.value.trim();
+// Load applications from Firestore
+async function loadCompanies() {
+  const querySnapshot = await getDocs(collection(db, "applications"));
+  querySnapshot.forEach((docSnap) => {
+    const appData = docSnap.data();
+    renderCompany({ id: docSnap.id, ...appData });
+  });
+}
+
+// Add new company
+async function addCompany() {
+  const companyName = document.getElementById("companyInput").value.trim();
+  const date = document.getElementById("dateInput").value;
+  const notes = document.getElementById("notesInput").value.trim();
 
   if (companyName === "" || date === "") {
     alert("Please enter both company name and date!");
     return;
   }
 
-  // Render on screen
-  renderCompany(companyName, date, notes);
+  const newApp = { company: companyName, date: date, notes: notes };
 
-  // Save to localStorage
-  const savedCompanies = JSON.parse(localStorage.getItem("applications")) || [];
-  savedCompanies.push({ company: companyName, date: date, notes: notes });
-  localStorage.setItem("applications", JSON.stringify(savedCompanies));
+  const docRef = await addDoc(collection(db, "applications"), newApp);
+  renderCompany({ id: docRef.id, ...newApp });
 
-  // Clear inputs
-  companyInput.value = "";
-  dateInput.value = "";
-  notesInput.value = "";
+  document.getElementById("companyInput").value = "";
+  document.getElementById("dateInput").value = "";
+  document.getElementById("notesInput").value = "";
 }
 
-function renderCompany(companyName, date, notes) {
+// Render company in UI
+function renderCompany(app) {
   const li = document.createElement("li");
 
   const infoDiv = document.createElement("div");
   infoDiv.classList.add("company-info");
-  infoDiv.innerHTML = `<strong>${companyName}</strong>
-                       <span class="date">Applied on: ${date}</span>
-                       <span class="notes">${notes}</span>`;
+  infoDiv.innerHTML = `<strong>${app.company}</strong>
+                       <span class="date">Applied on: ${app.date}</span>
+                       <span class="notes">${app.notes}</span>`;
 
   const delBtn = document.createElement("button");
   delBtn.innerText = "Delete";
   delBtn.classList.add("delete-btn");
-  delBtn.onclick = function () {
+  delBtn.onclick = async () => {
+    await deleteDoc(doc(db, "applications", app.id));
     li.remove();
-    deleteCompany(companyName, date, notes);
   };
 
   li.appendChild(infoDiv);
@@ -92,10 +71,5 @@ function renderCompany(companyName, date, notes) {
   document.getElementById("companyList").appendChild(li);
 }
 
-function deleteCompany(companyName, date, notes) {
-  let savedCompanies = JSON.parse(localStorage.getItem("applications")) || [];
-  savedCompanies = savedCompanies.filter(
-    app => !(app.company === companyName && app.date === date && app.notes === notes)
-  );
-  localStorage.setItem("applications", JSON.stringify(savedCompanies));
-}
+// Load everything when page opens
+document.addEventListener("DOMContentLoaded", loadCompanies);
