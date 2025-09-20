@@ -3,14 +3,16 @@ body {
   background: linear-gradient(135deg, #74ebd5, #ACB6E5);
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  min-height: 100vh;
   margin: 0;
+  padding: 20px;
 }
 
 .container {
   background: #fff;
-  width: 450px;
+  width: 100%;
+  max-width: 500px;
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -25,105 +27,31 @@ h2 {
 .input-area {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
-}
-
-.input-area input {
-  flex: 1;
-  padding: 10px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  outline: none;
-  font-size: 14px;
-}
-
-.input-area button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  background: #6a5acd;
-  color: white;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.input-area button:hover {
-  background: #483d8b;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  max-height: 250px;
-  overflow-y: auto;
-}
-
-ul li {
-  background: #f4f4f4;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-}
-
-.delete-btn {
-  background: crimson;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-size: 12px;
-  transition: background 0.3s;
-}
-
-.delete-btn:hover {
-  background: darkred;
-}
-
-.company-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.date {
-  font-size: 12px;
-  color: gray;
-}
-.input-area {
-  display: flex;
-  gap: 10px;
   margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
 .input-area input[type="text"],
-.input-area input[type="date"] {
+.input-area input[type="date"],
+.input-area textarea {
   flex: 1;
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
   border: 2px solid #ddd;
   border-radius: 10px;
   outline: none;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
-.input-area textarea {
-  width: 100%; /* full width */
-  padding: 10px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  outline: none;
-  font-size: 14px;
+textarea {
+  min-height: 100px;
   resize: vertical;
-  min-height: 80px; /* bigger height */
-  max-height: 200px;
 }
 
 .add-btn {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: none;
   border-radius: 10px;
   background: #6a5acd;
@@ -136,4 +64,55 @@ ul li {
 
 .add-btn:hover {
   background: #483d8b;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+ul li {
+  background: #f4f4f4;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 14px;
+}
+
+.company-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+}
+
+.date {
+  font-size: 12px;
+  color: gray;
+}
+
+.notes {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #555;
+  word-wrap: break-word;
+}
+
+.delete-btn {
+  background: crimson;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.3s;
+}
+
+.delete-btn:hover {
+  background: darkred;
 }
