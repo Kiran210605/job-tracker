@@ -3,16 +3,14 @@ body {
   background: linear-gradient(135deg, #74ebd5, #ACB6E5);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
+  align-items: center;
+  height: 100vh;
   margin: 0;
-  padding: 20px;
 }
 
 .container {
   background: #fff;
-  width: 100%;
-  max-width: 500px;
+  width: 500px;
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -28,30 +26,33 @@ h2 {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
-  flex-wrap: wrap;
 }
 
 .input-area input[type="text"],
-.input-area input[type="date"],
-.input-area textarea {
+.input-area input[type="date"] {
   flex: 1;
-  width: 100%;
-  padding: 12px;
+  padding: 10px;
   border: 2px solid #ddd;
   border-radius: 10px;
   outline: none;
   font-size: 14px;
-  box-sizing: border-box;
 }
 
-textarea {
-  min-height: 100px;
+.input-area textarea {
+  width: 100%; /* full width */
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
   resize: vertical;
+  min-height: 80px;
+  max-height: 200px;
 }
 
 .add-btn {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   border: none;
   border-radius: 10px;
   background: #6a5acd;
@@ -69,7 +70,7 @@ textarea {
 ul {
   list-style: none;
   padding: 0;
-  max-height: 300px;
+  max-height: 250px;
   overflow-y: auto;
 }
 
@@ -99,13 +100,12 @@ ul li {
   font-size: 12px;
   margin-top: 5px;
   color: #555;
-  word-wrap: break-word;
 }
 
 .delete-btn {
   background: crimson;
   border: none;
-  padding: 6px 10px;
+  padding: 5px 10px;
   border-radius: 8px;
   color: white;
   cursor: pointer;
