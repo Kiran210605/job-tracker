@@ -1,9 +1,9 @@
-// Import Firebase SDK
+// Import Firebase (v9 modular style)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
   from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-// 🔹 Replace with your Firebase config
+// Your Firebase config (replace with your own!)
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -13,7 +13,7 @@ const firebaseConfig = {
   appId: "YOUR_APP_ID"
 };
 
-// Initialize Firebase
+// Init Firebase + Firestore
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -27,7 +27,7 @@ async function loadCompanies() {
 }
 
 // Add new company
-window.addCompany = async function() {
+async function addCompany() {
   const companyName = document.getElementById("companyInput").value.trim();
   const date = document.getElementById("dateInput").value;
   const notes = document.getElementById("notesInput").value.trim();
@@ -45,7 +45,7 @@ window.addCompany = async function() {
   document.getElementById("companyInput").value = "";
   document.getElementById("dateInput").value = "";
   document.getElementById("notesInput").value = "";
-};
+}
 
 // Render company in UI
 function renderCompany(app) {
@@ -71,5 +71,5 @@ function renderCompany(app) {
   document.getElementById("companyList").appendChild(li);
 }
 
-// Load apps on page start
+// Load everything when page opens
 document.addEventListener("DOMContentLoaded", loadCompanies);
